@@ -26,33 +26,33 @@ const _nav = [
       text: "NEW",
     },
   },
-  {
-    component: CNavTitle,
-    name: "Theme",
-  },
-  {
-    component: CNavGroup,
-    name: "Buttons",
-    to: "/buttons",
-    icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: "Buttons",
-        to: "/buttons/buttons",
-      },
-      {
-        component: CNavItem,
-        name: "Buttons groups",
-        to: "/buttons/button-groups",
-      },
-      {
-        component: CNavItem,
-        name: "Dropdowns",
-        to: "/buttons/dropdowns",
-      },
-    ],
-  },
+  // {
+  //   component: CNavTitle,
+  //   name: "Theme",
+  // },
+  // {
+  //   component: CNavGroup,
+  //   name: "Buttons",
+  //   to: "/buttons",
+  //   icon: <CIcon icon={cilCursor} customClassName="nav-icon" />,
+  //   items: [
+  //     {
+  //       component: CNavItem,
+  //       name: "Buttons",
+  //       to: "/buttons/buttons",
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: "Buttons groups",
+  //       to: "/buttons/button-groups",
+  //     },
+  //     {
+  //       component: CNavItem,
+  //       name: "Dropdowns",
+  //       to: "/buttons/dropdowns",
+  //     },
+  //   ],
+  // },
 ];
 
 export default _nav;
