@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getCookie, removeCookie, setCookie } from "src/services/cookies";
 import isAuth from "src/utils/isAuth";
 import { Navigate } from "react-router-dom";
+import { useRouteError } from "react-router-dom";
 
 export const login = createAsyncThunk(
   "/login",
@@ -19,12 +20,25 @@ export const login = createAsyncThunk(
       });
       const data = await response.json();
       if (response.ok) {
+        const getIdUser = await fetch(
+          "https://gxoib8zz.directus.app/users?filter[email][_eq]=" +
+            payload.values.email,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${data.data.access_token}`,
+            },
+          }
+        );
+        const user = await getIdUser.json();
+        setCookie("userProfile", user);
         setCookie("user", data.data);
-        <Navigate to="/" />;
+        <Navigate to="/" replace />;
         window.location.reload();
       }
       if (!response.ok) {
-        throw new Error(data.message);
+        throw new Error(data.errors[0].message);
       }
       return data;
     } catch (err) {
@@ -77,6 +91,7 @@ const loginSlice = createSlice({
     },
     [login.rejected]: (state, action) => {
       state.isLoading = false;
+      console.log("pl:", action.errors);
       state.error = action.payload;
     },
     [logout.pending]: (state) => {

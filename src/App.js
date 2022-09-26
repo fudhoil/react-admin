@@ -1,7 +1,8 @@
-import React, { Component, Suspense } from "react";
-import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import React, { Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
 import "./scss/style.scss";
 import isAuth from "./utils/isAuth";
+// import Page404 from "./views/pages/page404/Page404";
 
 const loading = (
   <div className="pt-3 text-center">
@@ -14,29 +15,28 @@ const DefaultLayout = React.lazy(() => import("./layout/DefaultLayout"));
 
 // // Pages
 const Login = React.lazy(() => import("./views/pages/login/Login"));
+const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
 
 const App = () => {
   return (
-    <Routes>
-      {isAuth() ? (
-        <>
-          <Route path="/" element={<DefaultLayout />} />
-          <Route path="/logout" name="Logout Page" element={<Login />} />
-        </>
-      ) : (
-        <Route path="/login" name="Login Page" element={<Login />} />
-      )}
-      <Route
-        path="*"
-        element={
-          isAuth() ? (
-            <DefaultLayout path="/" to="/" />
-          ) : (
-            <Login path="/login" to="/login" />
-          )
-        }
-      />
-    </Routes>
+    <Suspense fallback={loading}>
+      <Routes>
+        {isAuth() ? (
+          <>
+            <Route path="/logout" name="Logout Page" element={<Login />} />
+            <Route
+              path="/login"
+              name="Login Page"
+              element={<DefaultLayout />}
+            />
+          </>
+        ) : (
+          <Route path="/login" name="Login Page" element={<Login />} />
+        )}
+        <Route path="/" element={isAuth() ? <DefaultLayout /> : <Login />} />
+        <Route path="*" element={<Page404 />} />
+      </Routes>
+    </Suspense>
   );
 };
 

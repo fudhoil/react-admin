@@ -12,6 +12,7 @@ import {
   CInputGroup,
   CInputGroupText,
   CRow,
+  CFormFeedback,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { cilLockLocked, cilUser } from "@coreui/icons";
@@ -21,10 +22,14 @@ import { getCookie } from "src/services/cookies";
 
 const Login = () => {
   const [values, setValues] = useState({ email: "", password: "" });
+  const [{ validated, message }, setValidated] = useState({
+    validated: false,
+    message: "",
+  });
 
   // const [showPost, setShowPost] = useState(false);
 
-  const { loading } = useSelector((state) => ({
+  const { error } = useSelector((state) => ({
     ...state.login,
   }));
 
@@ -34,8 +39,10 @@ const Login = () => {
     e.preventDefault();
     const response = await dispatch(login({ values }));
     // const res = await dispatch(logout());
-    setValues({ email: "", password: "" });
-    console.log("cookie: ", getCookie("user"));
+    if (response.errors) {
+      setValidated(true, response.errors[0].message);
+    }
+    setValues({ email: email, password: password });
     // setShowPost(true);
   };
   return (
@@ -46,7 +53,11 @@ const Login = () => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
-                  <CForm onSubmit={handleSubmit}>
+                  <CForm
+                    noValidate
+                    validated={validated}
+                    onSubmit={handleSubmit}
+                  >
                     <h1>Login</h1>
                     <p className="text-medium-emphasis">
                       Sign In to your account
@@ -59,10 +70,12 @@ const Login = () => {
                         placeholder="Email"
                         autoComplete="email"
                         type="email"
+                        feedbackValid="Looks good!"
                         value={values.email}
                         onChange={(e) =>
                           setValues({ ...values, email: e.target.value })
                         }
+                        required
                       />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
@@ -73,12 +86,22 @@ const Login = () => {
                         type="password"
                         placeholder="Password"
                         autoComplete="current-password"
+                        feedbackValid="Looks good!"
                         value={values.password}
                         onChange={(e) =>
                           setValues({ ...values, password: e.target.value })
                         }
+                        required
                       />
                     </CInputGroup>
+                    <CFormFeedback
+                      invalid={validated}
+                      className="text-danger mb-4 mt-2"
+                    >
+                      {error === "Invalid user credentials."
+                        ? "Wrong email or password"
+                        : error}
+                    </CFormFeedback>
                     <CRow>
                       <CCol xs={6}>
                         <CButton color="primary" className="px-4" type="submit">
