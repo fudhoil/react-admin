@@ -9,7 +9,7 @@ const AppFooter = () => {
       </div>
       <div className="ms-auto">
         <span className="me-1">Powered by</span>
-        CoreUI React Admin &amp;
+        CoreUI React
       </div>
     </CFooter>
   );

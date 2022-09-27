@@ -26,24 +26,12 @@ const AppSidebar = () => {
   const show = useSelector((state) => state.sidebar.sidebarShow);
   const dispatch = useDispatch();
 
-  const handleToggleSidebar = () => {
-    const val = [true, "responsive"].includes(show) ? false : "responsive";
-    dispatch(setSidebarShow({ sidebarShow: val }));
-  };
-
   const handleToggleUnfoldable = () => {
     dispatch(setSidebarUnfoldable({ sidebarUnfoldable: !unfoldable }));
   };
 
   return (
-    <CSidebar
-      position="fixed"
-      unfoldable={unfoldable}
-      visible={show}
-      // onVisibleChange={(visible) => {
-      //   handleToggleSidebar();
-      // }}
-    >
+    <CSidebar position="fixed" unfoldable={unfoldable} visible={show}>
       <CSidebarBrand className="d-none d-md-flex" to="/">
         {/* <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} /> */}
         {/* <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} /> */}
