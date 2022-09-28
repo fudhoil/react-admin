@@ -37,7 +37,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    document.title = "Login";
+    document.title = "UGM Admin | Login";
   }, []);
 
   const handleSubmit = async (e) => {

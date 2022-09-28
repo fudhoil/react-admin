@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
-import Tabs3 from "src/components/Tabs3";
-// import { DocsExample } from "src/components";
+import { Tabs3 } from "src/components";
 
 const Buttons = () => {
   useEffect(() => {
-    document.title = "Home";
+    document.title = "UGM Admin | Home";
   }, []);
 
   return (
