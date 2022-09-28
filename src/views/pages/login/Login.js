@@ -13,6 +13,7 @@ import {
   CInputGroupText,
   CRow,
   CFormFeedback,
+  CSpinner,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { cilLockLocked, cilUser } from "@coreui/icons";
@@ -29,7 +30,7 @@ const Login = () => {
 
   // const [showPost, setShowPost] = useState(false);
 
-  const { error } = useSelector((state) => ({
+  const { error, isLoading } = useSelector((state) => ({
     ...state.login,
   }));
 
@@ -109,6 +110,13 @@ const Login = () => {
                     <CRow>
                       <CCol xs={6}>
                         <CButton color="primary" className="px-4" type="submit">
+                          <CSpinner
+                            component="span"
+                            size="sm"
+                            aria-hidden="true"
+                            hidden={!isLoading}
+                            className="mr-2"
+                          />
                           Login
                         </CButton>
                       </CCol>
