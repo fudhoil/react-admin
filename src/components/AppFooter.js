@@ -7,10 +7,10 @@ const AppFooter = () => {
       <div>
         <span className="ms-1">&copy; 2022 fudhoil</span>
       </div>
-      <div className="ms-auto">
+      {/* <div className="ms-auto">
         <span className="me-1">Powered by</span>
         CoreUI React
-      </div>
+      </div> */}
     </CFooter>
   );
 };

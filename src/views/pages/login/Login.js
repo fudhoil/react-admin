@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   CButton,
@@ -34,6 +34,10 @@ const Login = () => {
   }));
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    document.title = "Login";
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
