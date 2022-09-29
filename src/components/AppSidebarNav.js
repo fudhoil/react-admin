@@ -31,6 +31,7 @@ export const AppSidebarNav = ({ items }) => {
           })}
         key={index}
         {...rest}
+        activeClassName={location.pathname === rest.to ? "active" : ""}
       >
         {navLink(name, icon, badge)}
       </Component>

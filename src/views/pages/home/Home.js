@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 import { Tabs3 } from "src/components";
 
-const Buttons = () => {
+const Home = () => {
   useEffect(() => {
     document.title = "UGM Admin | Home";
   }, []);
@@ -16,11 +16,10 @@ const Buttons = () => {
           </CCardHeader>
           <CCardBody>
             <p className="text-medium-emphasis small">
-              CoreUI includes a bunch of predefined buttons components, each
-              serving its own semantic purpose. Buttons show what action will
-              happen when the user clicks or touches it. CoreUI buttons are used
-              to initialize operations, both in the background or foreground of
-              an experience.
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry. Lorem Ipsum has been the industry's standard dummy text
+              ever since the 1500s, when an unknown printer took a galley of
+              type and scrambled it to make a type specimen book.
             </p>
             <Tabs3
               tab1="Preview"
@@ -37,4 +36,4 @@ const Buttons = () => {
   );
 };
 
-export default Buttons;
+export default Home;

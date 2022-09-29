@@ -23,7 +23,6 @@ const AppHeaderDropdown = () => {
   const handleLogout = async (e) => {
     const res = await dispatch(logout());
   };
-  console.log("userProfile", getCookie("userProfile"));
   return (
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>

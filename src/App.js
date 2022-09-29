@@ -33,8 +33,7 @@ const App = () => {
         ) : (
           <Route path="/login" name="Login Page" element={<Login />} />
         )}
-        <Route path="/" element={isAuth() ? <DefaultLayout /> : <Login />} />
-        <Route path="*" element={<Page404 />} />
+        <Route path="*" element={isAuth() ? <DefaultLayout /> : <Login />} />
       </Routes>
     </Suspense>
   );

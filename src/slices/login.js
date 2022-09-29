@@ -69,10 +69,29 @@ export const logout = createAsyncThunk("/logout", async () => {
   return true;
 });
 
+export const isLoggedIn = createAsyncThunk("/isLoggedIn", async () => {
+  const response = await fetch("https://gxoib8zz.directus.app/users/me", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getCookie("user").access_token}`,
+    },
+  });
+  const data = await response.json();
+  if (response.ok) {
+    return data;
+  }
+  if (!response.ok) {
+    throw new Error(data.message);
+  }
+  return data;
+});
+
 const initialState = {
   email: "",
   password: "",
   isAuth: isAuth(),
+  isLogged: false,
   isLoading: false,
   error: null,
 };
@@ -103,6 +122,18 @@ const loginSlice = createSlice({
       state.error = null;
     },
     [logout.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [isLoggedIn.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [isLoggedIn.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.isLogged = true;
+      state.error = null;
+    },
+    [isLoggedIn.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
