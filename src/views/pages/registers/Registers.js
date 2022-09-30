@@ -32,7 +32,7 @@ const Submissions = () => {
         let ctr = 0;
         keys.forEach((key) => {
           if (ctr > 0) result += columnDelimiter;
-          if (key === "date_created" || key === "choose_day") {
+          if (key === "date_created") {
             const date = new Date(item[key]);
             let day = date.toLocaleDateString("en-us", { day: "numeric" });
             let month = date.toLocaleDateString("en-us", { month: "short" });
@@ -78,20 +78,24 @@ const Submissions = () => {
         selector: (row) => row.email,
       },
       {
-        name: "Name",
-        selector: (row) => row.nama,
+        name: "First Name",
+        selector: (row) => row.firstName,
+      },
+      {
+        name: "Last Name",
+        selector: (row) => row.lastName,
       },
       {
         name: "Institution",
-        selector: (row) => row.institusi,
+        selector: (row) => row.institution,
       },
       {
         name: "No Handphone",
-        selector: (row) => row.no_hp,
+        selector: (row) => row.phone,
       },
       {
         name: "Day Choosed",
-        cell: (row) => <Moment format="DD MMM YYYY">{row.choose_day}</Moment>,
+        cell: (row) => row.choose_day,
       },
     ];
     //   const { registers } = useSelector((state) => state.registers);
