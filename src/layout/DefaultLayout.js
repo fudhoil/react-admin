@@ -1,22 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   AppContent,
   AppSidebar,
   AppFooter,
   AppHeader,
 } from "../components/index";
-import { useDispatch, useSelector } from "react-redux";
-import { isLoggedIn, logout } from "src/slices/login";
 
 const DefaultLayout = () => {
-  const dispatch = useDispatch();
-  const { isLogged } = useSelector((state) => state.login);
-  useEffect(() => {
-    const isLoggedUser = dispatch(isLoggedIn());
-    if (!isLoggedUser) {
-      return dispatch(logout());
-    }
-  }, [dispatch, isLogged]);
   return (
     <div>
       <AppSidebar />

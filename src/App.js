@@ -1,7 +1,9 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./scss/style.scss";
 import isAuth from "./utils/isAuth";
+import { useDispatch, useSelector } from "react-redux";
+import { isLoggedIn, logout } from "src/slices/login";
 // import Page404 from "./views/pages/page404/Page404";
 
 const loading = (
@@ -18,6 +20,18 @@ const Login = React.lazy(() => import("./views/pages/login/Login"));
 const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
 
 const App = () => {
+  const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.submissions);
+  useEffect(() => {
+    dispatch(isLoggedIn());
+    if (
+      error === "Unauthorized" ||
+      error === "Forbidden" ||
+      error === "Token expired."
+    ) {
+      dispatch(logout());
+    }
+  }, [error]);
   return (
     <Suspense fallback={loading}>
       <Routes>

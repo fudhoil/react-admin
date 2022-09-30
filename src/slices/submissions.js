@@ -152,6 +152,39 @@ export const createSubmission = createAsyncThunk(
 //   }
 // );
 
+// export const exportSubmissionsCsv = createAsyncThunk(
+//   "export-submissions-csv",
+//   async (payload, { rejectWithValue }) => {
+//     try {
+//       const response = await fetch(
+//         "https://gxoib8zz.directus.app/utils/export/submissions",
+//         {
+//           method: "POST",
+//           headers: {
+//             "Content-Type": "application/json",
+//             Authorization: `Bearer ${getCookie("user").access_token}`,
+//           },
+//           body: JSON.stringify({
+//             query: {
+//               title
+//             }
+//           })
+//         }
+//       );
+//       const data = await response.json();
+//       if (response.ok) {
+//         return data;
+//       }
+//       if (!response.ok) {
+//         throw new Error(data.errors[0].message);
+//       }
+//       return data;
+//     } catch (err) {
+//       return rejectWithValue(err.message);
+//     }
+//   }
+// );
+
 const initialState = {
   submissions: [],
   submission: {},

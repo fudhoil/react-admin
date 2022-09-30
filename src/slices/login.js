@@ -81,8 +81,9 @@ export const isLoggedIn = createAsyncThunk("/isLoggedIn", async () => {
   if (response.ok) {
     return data;
   }
+  const error = await new Error(data.message);
   if (!response.ok) {
-    throw new Error(data.message);
+    throw error;
   }
   return data;
 });
@@ -135,6 +136,7 @@ const loginSlice = createSlice({
     },
     [isLoggedIn.rejected]: (state, action) => {
       state.isLoading = false;
+      state.isLogged = false;
       state.error = action.payload;
     },
   },
