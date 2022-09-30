@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
 import { CCard, CCardBody, CCol, CRow } from "@coreui/react";
 import { useSelector, useDispatch } from "react-redux";
-import { getSubmissions } from "src/slices/submissions";
+import { getRegisters } from "src/slices/registers";
 import { CButton, CLink } from "@coreui/react";
 import DataTable from "react-data-table-component";
 import Moment from "react-moment";
 
 const Submissions = () => {
   const [data, setData] = React.useState([]);
-  const { submissions } = useSelector((state) => state.submissions);
+  const { registers } = useSelector((state) => state.registers);
   const dispatch = useDispatch();
   useEffect(() => {
     document.title = "UGM Admin | Submissions";
-    dispatch(getSubmissions());
-    setData(submissions);
+    dispatch(getRegisters());
+    setData(registers);
   }, [dispatch]);
 
   const ExportCSV = (props) => {
@@ -32,10 +32,7 @@ const Submissions = () => {
         let ctr = 0;
         keys.forEach((key) => {
           if (ctr > 0) result += columnDelimiter;
-          if (key === "bukti_pembayaran" || key === "fullpaper") {
-            result +=
-              "https://gxoib8zz.directus.app/assets/" + item[key] + "?download";
-          } else if (key === "date_created") {
+          if (key === "date_created" || key === "choose_day") {
             const date = new Date(item[key]);
             let day = date.toLocaleDateString("en-us", { day: "numeric" });
             let month = date.toLocaleDateString("en-us", { month: "short" });
@@ -77,8 +74,8 @@ const Submissions = () => {
 
     const columns = [
       {
-        name: "Title",
-        selector: (row) => row.judul,
+        name: "Email",
+        selector: (row) => row.email,
       },
       {
         name: "Name",
@@ -89,54 +86,25 @@ const Submissions = () => {
         selector: (row) => row.institusi,
       },
       {
-        name: "Subteam",
-        selector: (row) => row.subteam,
+        name: "No Handphone",
+        selector: (row) => row.no_hp,
       },
       {
-        name: "Bukti Pembayaran",
-        button: true,
-        cell: (row) => (
-          <CButton
-            size="sm"
-            href={
-              "https://gxoib8zz.directus.app/assets/" +
-              row.bukti_pembayaran +
-              "?download"
-            }
-            target="_blank"
-          >
-            Download
-          </CButton>
-        ),
-      },
-      {
-        name: "Fullpaper",
-        cell: (row) => (
-          <CButton
-            size="sm"
-            href={
-              "https://gxoib8zz.directus.app/assets/" +
-              row.fullpaper +
-              "?download"
-            }
-            target="_blank"
-          >
-            Download
-          </CButton>
-        ),
+        name: "Day Choosed",
+        cell: (row) => <Moment format="DD MMM YYYY">{row.choose_day}</Moment>,
       },
     ];
-    //   const { submissions } = useSelector((state) => state.submissions);
+    //   const { registers } = useSelector((state) => state.registers);
     const actionsMemo = React.useMemo(
-      () => <Export onExport={() => downloadCSV(props.submissions)} />,
+      () => <Export onExport={() => downloadCSV(props.registers)} />,
       []
     );
 
     return (
       <DataTable
-        title="Submissions Table"
+        title="Registers Table"
         columns={columns}
-        data={props.submissions}
+        data={props.registers}
         actions={actionsMemo}
       />
     );
@@ -147,7 +115,7 @@ const Submissions = () => {
       <CCol xs={12}>
         <CCard>
           <CCardBody>
-            {submissions && <ExportCSV submissions={submissions} />}
+            {registers && <ExportCSV registers={registers} />}
           </CCardBody>
         </CCard>
       </CCol>

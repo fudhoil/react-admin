@@ -20,6 +20,12 @@ const _nav = [
     to: "/submissions",
     icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
   },
+  {
+    component: CNavItem,
+    name: "Registers",
+    to: "/registers",
+    icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
+  },
   // {
   //   component: CNavTitle,
   //   name: "Theme",
