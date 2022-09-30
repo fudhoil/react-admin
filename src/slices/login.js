@@ -82,6 +82,7 @@ export const isLoggedIn = createAsyncThunk("/isLoggedIn", async () => {
     return data;
   }
   const error = await new Error(data.message);
+  console.log(error);
   if (!response.ok) {
     throw error;
   }

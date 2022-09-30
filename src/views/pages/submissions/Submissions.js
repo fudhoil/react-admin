@@ -8,7 +8,7 @@ import Moment from "react-moment";
 
 const Submissions = () => {
   const [data, setData] = React.useState([]);
-  const { submissions } = useSelector((state) => state.submissions);
+  const { submissions, isLoading } = useSelector((state) => state.submissions);
   const dispatch = useDispatch();
   useEffect(() => {
     document.title = "UGM Admin | Submissions";
@@ -72,7 +72,9 @@ const Submissions = () => {
     };
 
     const Export = ({ onExport }) => (
-      <CButton onClick={(e) => onExport(e.target.value)}>Export</CButton>
+      <CButton size="sm" onClick={(e) => onExport(e.target.value)}>
+        Export CSV
+      </CButton>
     );
 
     const columns = [
@@ -98,6 +100,7 @@ const Submissions = () => {
         cell: (row) => (
           <CButton
             size="sm"
+            variant="outline"
             href={
               "https://gxoib8zz.directus.app/assets/" +
               row.bukti_pembayaran +
@@ -114,6 +117,7 @@ const Submissions = () => {
         cell: (row) => (
           <CButton
             size="sm"
+            variant="outline"
             href={
               "https://gxoib8zz.directus.app/assets/" +
               row.fullpaper +
@@ -138,6 +142,8 @@ const Submissions = () => {
         columns={columns}
         data={props.submissions}
         actions={actionsMemo}
+        progressPending={isLoading}
+        pagination
       />
     );
   };

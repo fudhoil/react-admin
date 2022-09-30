@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { CCard, CCardBody, CCol, CRow } from "@coreui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { getRegisters } from "src/slices/registers";
-import { CButton, CLink } from "@coreui/react";
+import { CButton } from "@coreui/react";
 import DataTable from "react-data-table-component";
-import Moment from "react-moment";
+// import Moment from "react-moment";
 
 const Submissions = () => {
   const [data, setData] = React.useState([]);
-  const { registers } = useSelector((state) => state.registers);
+  const { registers, isLoading } = useSelector((state) => state.registers);
   const dispatch = useDispatch();
   useEffect(() => {
     document.title = "UGM Admin | Submissions";
@@ -69,7 +69,9 @@ const Submissions = () => {
     };
 
     const Export = ({ onExport }) => (
-      <CButton onClick={(e) => onExport(e.target.value)}>Export</CButton>
+      <CButton size="sm" onClick={(e) => onExport(e.target.value)}>
+        Export CSV
+      </CButton>
     );
 
     const columns = [
@@ -110,6 +112,8 @@ const Submissions = () => {
         columns={columns}
         data={props.registers}
         actions={actionsMemo}
+        progressPending={isLoading}
+        pagination
       />
     );
   };

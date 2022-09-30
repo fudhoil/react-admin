@@ -21,7 +21,7 @@ const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
 
 const App = () => {
   const dispatch = useDispatch();
-  const { error } = useSelector((state) => state.submissions);
+  const { error } = useSelector((state) => state.login);
   useEffect(() => {
     dispatch(isLoggedIn());
     if (
