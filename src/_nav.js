@@ -16,8 +16,8 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: "Submissions",
-    to: "/submissions",
+    name: "Submitions",
+    to: "/submitions",
     icon: <CIcon icon={cilEnvelopeClosed} customClassName="nav-icon" />,
   },
   {

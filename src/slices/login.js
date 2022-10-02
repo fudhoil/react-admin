@@ -93,7 +93,7 @@ const initialState = {
   email: "",
   password: "",
   isAuth: isAuth(),
-  isLogged: false,
+  isLogged: true,
   isLoading: false,
   error: null,
 };
@@ -108,6 +108,7 @@ const loginSlice = createSlice({
     [login.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isAuth = true;
+      state.isLogged = true;
       state.error = null;
     },
     [login.rejected]: (state, action) => {
@@ -121,6 +122,7 @@ const loginSlice = createSlice({
     [logout.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isAuth = false;
+      state.isLogged = false;
       state.error = null;
     },
     [logout.rejected]: (state, action) => {

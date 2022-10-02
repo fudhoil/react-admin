@@ -6,12 +6,12 @@ import { CButton } from "@coreui/react";
 import DataTable from "react-data-table-component";
 // import Moment from "react-moment";
 
-const Submissions = () => {
+const Submitions = () => {
   const [data, setData] = React.useState([]);
   const { registers, isLoading } = useSelector((state) => state.registers);
   const dispatch = useDispatch();
   useEffect(() => {
-    document.title = "UGM Admin | Submissions";
+    document.title = "UGM Admin | Submitions";
     dispatch(getRegisters());
     setData(registers);
   }, [dispatch]);
@@ -131,4 +131,4 @@ const Submissions = () => {
   );
 };
 
-export default Submissions;
+export default Submitions;

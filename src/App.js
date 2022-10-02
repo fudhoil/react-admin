@@ -21,17 +21,15 @@ const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
 
 const App = () => {
   const dispatch = useDispatch();
-  const { error } = useSelector((state) => state.login);
+  const { isLogged } = useSelector((state) => state.login);
+  const { error: errorRegister } = useSelector((state) => state.registers);
+  const { error: errorSubmission } = useSelector((state) => state.submitions);
   useEffect(() => {
     dispatch(isLoggedIn());
-    if (
-      error === "Unauthorized" ||
-      error === "Forbidden" ||
-      error === "Token expired."
-    ) {
+    if (!isLogged || errorRegister || errorSubmission) {
       dispatch(logout());
     }
-  }, [error]);
+  }, [isLogged]);
   return (
     <Suspense fallback={loading}>
       <Routes>

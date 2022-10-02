@@ -2,8 +2,8 @@ import React from "react";
 
 // const Dashboard = React.lazy(() => import("./views/dashboard/Dashboard"));
 const Home = React.lazy(() => import("./views/pages/home/Home"));
-const Submissions = React.lazy(() =>
-  import("./views/pages/submissions/Submissions")
+const Submitions = React.lazy(() =>
+  import("./views/pages/submitions/Submitions")
 );
 const Registers = React.lazy(() => import("./views/pages/registers/Registers"));
 const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
@@ -11,10 +11,10 @@ const Page404 = React.lazy(() => import("./views/pages/page404/Page404"));
 const routes = [
   { path: "/home", exact: true, name: "Home", element: Home },
   {
-    path: "/submissions",
+    path: "/submitions",
     exact: true,
-    name: "Submissions",
-    element: Submissions,
+    name: "Submitions",
+    element: Submitions,
   },
   {
     path: "/registers",

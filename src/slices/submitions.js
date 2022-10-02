@@ -3,12 +3,12 @@ import { getCookie, removeCookie, setCookie } from "src/services/cookies";
 import isAuth from "src/utils/isAuth";
 import { Navigate } from "react-router-dom";
 
-export const getSubmissions = createAsyncThunk(
-  "/submissions",
+export const getSubmitions = createAsyncThunk(
+  "/submitions",
   async (payload, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        "https://gxoib8zz.directus.app/items/submissions",
+        "https://gxoib8zz.directus.app/items/submition",
         {
           method: "GET",
           headers: {
@@ -31,12 +31,12 @@ export const getSubmissions = createAsyncThunk(
   }
 );
 
-export const getSubmission = createAsyncThunk(
-  "/submission",
+export const getSubmition = createAsyncThunk(
+  "/submition",
   async (payload, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        "https://gxoib8zz.directus.app/items/submissions/" + payload.id,
+        "https://gxoib8zz.directus.app/items/submitions/" + payload.id,
         {
           method: "GET",
           headers: {
@@ -59,12 +59,12 @@ export const getSubmission = createAsyncThunk(
   }
 );
 
-export const createSubmission = createAsyncThunk(
-  "/submission",
+export const createSubmition = createAsyncThunk(
+  "/submition",
   async (payload, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        "https://gxoib8zz.directus.app/items/submissions",
+        "https://gxoib8zz.directus.app/items/submitions",
         {
           method: "POST",
           headers: {
@@ -92,12 +92,12 @@ export const createSubmission = createAsyncThunk(
   }
 );
 
-// export const updateSubmission = createAsyncThunk(
-//   "/submission",
+// export const updateSubmition = createAsyncThunk(
+//   "/submition",
 //   async (payload, { rejectWithValue }) => {
 //     try {
 //       const response = await fetch(
-//         "https://gxoib8zz.directus.app/items/submissions/" + payload.id,
+//         "https://gxoib8zz.directus.app/items/submitions/" + payload.id,
 //         {
 //           method: "PATCH",
 //           headers: {
@@ -124,12 +124,12 @@ export const createSubmission = createAsyncThunk(
 //   }
 // );
 
-// export const deleteSubmission = createAsyncThunk(
-//   "/submission",
+// export const deleteSubmition = createAsyncThunk(
+//   "/submition",
 //   async (payload, { rejectWithValue }) => {
 //     try {
 //       const response = await fetch(
-//         "https://gxoib8zz.directus.app/items/submissions/" + payload.id,
+//         "https://gxoib8zz.directus.app/items/submitions/" + payload.id,
 //         {
 //           method: "DELETE",
 //           headers: {
@@ -152,12 +152,12 @@ export const createSubmission = createAsyncThunk(
 //   }
 // );
 
-// export const exportSubmissionsCsv = createAsyncThunk(
-//   "export-submissions-csv",
+// export const exportSubmitionsCsv = createAsyncThunk(
+//   "export-submitions-csv",
 //   async (payload, { rejectWithValue }) => {
 //     try {
 //       const response = await fetch(
-//         "https://gxoib8zz.directus.app/utils/export/submissions",
+//         "https://gxoib8zz.directus.app/utils/export/submitions",
 //         {
 //           method: "POST",
 //           headers: {
@@ -186,78 +186,78 @@ export const createSubmission = createAsyncThunk(
 // );
 
 const initialState = {
-  submissions: [],
-  submission: {},
+  submitions: [],
+  submition: {},
   isLoading: false,
   error: null,
 };
 
-export const submissionsSlice = createSlice({
-  name: "submissions",
+export const submitionsSlice = createSlice({
+  name: "submitions",
   initialState,
   reducers: {
-    clearSubmission: (state) => {
-      state.submission = {};
+    clearSubmition: (state) => {
+      state.submition = {};
     },
   },
   extraReducers: {
-    [getSubmissions.pending]: (state) => {
+    [getSubmitions.pending]: (state) => {
       state.isLoading = true;
     },
-    [getSubmissions.fulfilled]: (state, action) => {
+    [getSubmitions.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.submissions = action.payload.data;
+      state.submitions = action.payload.data;
     },
-    [getSubmissions.rejected]: (state, action) => {
+    [getSubmitions.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
-    [getSubmission.pending]: (state) => {
+    [getSubmition.pending]: (state) => {
       state.isLoading = true;
     },
-    [getSubmission.fulfilled]: (state, action) => {
+    [getSubmition.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.submission = action.payload.data;
+      state.submition = action.payload.data;
     },
-    [getSubmission.rejected]: (state, action) => {
+    [getSubmition.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
-    [createSubmission.pending]: (state) => {
+    [createSubmition.pending]: (state) => {
       state.isLoading = true;
     },
-    [createSubmission.fulfilled]: (state, action) => {
+    [createSubmition.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.submission = action.payload.data;
+      state.submition = action.payload.data;
     },
-    [createSubmission.rejected]: (state, action) => {
+    [createSubmition.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
-    // [updateSubmission.pending]: (state) => {
+    // [updateSubmition.pending]: (state) => {
     //   state.isLoading = true;
     // },
-    // [updateSubmission.fulfilled]: (state, action) => {
+    // [updateSubmition.fulfilled]: (state, action) => {
     //   state.isLoading = false;
-    //   state.submission = action.payload.data;
+    //   state.submition = action.payload.data;
     // },
-    // [updateSubmission.rejected]: (state, action) => {
+    // [updateSubmition.rejected]: (state, action) => {
     //   state.isLoading = false;
     //   state.error = action.payload;
     // },
-    // [deleteSubmission.pending]: (state) => {
+    // [deleteSubmition.pending]: (state) => {
     //   state.isLoading = true;
     // },
-    // [deleteSubmission.fulfilled]: (state, action) => {
+    // [deleteSubmition.fulfilled]: (state, action) => {
     //   state.isLoading = false;
-    //   state.submission = action.payload.data;
+    //   state.submition = action.payload.data;
     // },
-    // [deleteSubmission.rejected]: (state, action) => {
+    // [deleteSubmition.rejected]: (state, action) => {
     //   state.isLoading = false;
     //   state.error = action.payload;
     // },
   },
 });
 
-export const { clearSubmission } = submissionsSlice.actions;
-export default submissionsSlice.reducer;
+export const { clearSubmition } = submitionsSlice.actions;
+export default submitionsSlice.reducer;

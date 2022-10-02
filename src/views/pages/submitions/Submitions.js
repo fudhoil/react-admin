@@ -1,19 +1,19 @@
 import React, { useEffect } from "react";
 import { CCard, CCardBody, CCol, CRow } from "@coreui/react";
 import { useSelector, useDispatch } from "react-redux";
-import { getSubmissions } from "src/slices/submissions";
+import { getSubmitions } from "src/slices/submitions";
 import { CButton, CLink } from "@coreui/react";
 import DataTable from "react-data-table-component";
 import Moment from "react-moment";
 
-const Submissions = () => {
+const Submitions = () => {
   const [data, setData] = React.useState([]);
-  const { submissions, isLoading } = useSelector((state) => state.submissions);
+  const { submitions, isLoading } = useSelector((state) => state.submitions);
   const dispatch = useDispatch();
   useEffect(() => {
-    document.title = "UGM Admin | Submissions";
-    dispatch(getSubmissions());
-    setData(submissions);
+    document.title = "UGM Admin | Submitions";
+    dispatch(getSubmitions());
+    setData(submitions);
   }, [dispatch]);
 
   const ExportCSV = (props) => {
@@ -80,19 +80,41 @@ const Submissions = () => {
     const columns = [
       {
         name: "Title",
-        selector: (row) => row.judul,
+        selector: (row) => row.title,
       },
       {
         name: "Name",
-        selector: (row) => row.nama,
+        selector: (row) => row.fullName,
+      },
+      {
+        name: "Email",
+        selector: (row) => row.email,
       },
       {
         name: "Institution",
-        selector: (row) => row.institusi,
+        selector: (row) => row.institution,
       },
       {
         name: "Subteam",
         selector: (row) => row.subteam,
+      },
+      {
+        name: "Student ID",
+        button: true,
+        cell: (row) => (
+          <CButton
+            size="sm"
+            variant="outline"
+            href={
+              "https://gxoib8zz.directus.app/assets/" +
+              row.student_id +
+              "?download"
+            }
+            target="_blank"
+          >
+            Download
+          </CButton>
+        ),
       },
       {
         name: "Bukti Pembayaran",
@@ -103,7 +125,7 @@ const Submissions = () => {
             variant="outline"
             href={
               "https://gxoib8zz.directus.app/assets/" +
-              row.bukti_pembayaran +
+              row.bukti_transfer +
               "?download"
             }
             target="_blank"
@@ -120,7 +142,7 @@ const Submissions = () => {
             variant="outline"
             href={
               "https://gxoib8zz.directus.app/assets/" +
-              row.fullpaper +
+              row.fullPaper +
               "?download"
             }
             target="_blank"
@@ -130,17 +152,17 @@ const Submissions = () => {
         ),
       },
     ];
-    //   const { submissions } = useSelector((state) => state.submissions);
+    //   const { submitions } = useSelector((state) => state.submitions);
     const actionsMemo = React.useMemo(
-      () => <Export onExport={() => downloadCSV(props.submissions)} />,
+      () => <Export onExport={() => downloadCSV(props.submitions)} />,
       []
     );
 
     return (
       <DataTable
-        title="Submissions Table"
+        title="Submitions Table"
         columns={columns}
-        data={props.submissions}
+        data={props.submitions}
         actions={actionsMemo}
         progressPending={isLoading}
         pagination
@@ -153,7 +175,7 @@ const Submissions = () => {
       <CCol xs={12}>
         <CCard>
           <CCardBody>
-            {submissions && <ExportCSV submissions={submissions} />}
+            {submitions && <ExportCSV submitions={submitions} />}
           </CCardBody>
         </CCard>
       </CCol>
@@ -161,4 +183,4 @@ const Submissions = () => {
   );
 };
 
-export default Submissions;
+export default Submitions;
