@@ -14,6 +14,7 @@ import {
   CRow,
   CFormFeedback,
   CSpinner,
+  CImage,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { cilLockLocked, cilUser } from "@coreui/icons";
@@ -37,7 +38,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    document.title = "UGM Admin | Login";
+    document.title = "UGM International Forum - Admin | Login";
   }, []);
 
   const handleSubmit = async (e) => {
@@ -58,6 +59,15 @@ const Login = () => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
+                  <CRow className="justify-content-center">
+                    <CCol xs={6} sm={6} md={6} lg={6}>
+                      <CImage
+                        width={200}
+                        fluid
+                        src={process.env.PUBLIC_URL + "/logo-only.png"}
+                      />
+                    </CCol>
+                  </CRow>
                   <CForm
                     noValidate
                     validated={validated}

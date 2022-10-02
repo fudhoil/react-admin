@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -10,6 +10,8 @@ import {
   CHeaderToggler,
   CNavLink,
   CNavItem,
+  CImage,
+  CTooltip,
 } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from "@coreui/icons";
@@ -17,10 +19,23 @@ import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from "@coreui/icons";
 import { AppBreadcrumb } from "./index";
 import { AppHeaderDropdown } from "./header/index";
 import { setSidebarShow } from "src/slices/sidebar";
+import { fetchUser } from "src/slices/user";
 
 const AppHeader = () => {
   const dispatch = useDispatch();
   const show = useSelector((state) => state.sidebar.sidebarShow);
+  const { user } = useSelector((state) => state.user);
+  const [userName, setUserName] = React.useState("");
+  const [fullName, setFullName] = React.useState("");
+  useEffect(() => {
+    dispatch(fetchUser());
+    setFullName(user?.first_name + " " + user?.last_name);
+    if (fullName.length > 20) {
+      setUserName(fullName.trim().substring(0, 20) + "...");
+    } else {
+      setUserName(fullName);
+    }
+  }, [user]);
 
   return (
     <CHeader position="sticky" className="mb-4">
@@ -37,11 +52,21 @@ const AppHeader = () => {
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
             <CNavLink to="/" component={NavLink}>
-              Home
+              <CImage
+                width={270}
+                fluid
+                src={process.env.PUBLIC_URL + "/logo-negative.png"}
+              />
             </CNavLink>
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav className="ms-3">
+          <CNavItem className="pt-2">
+            Welcome,{" "}
+            <CTooltip content={fullName} placement="bottom">
+              <b>{userName}</b>
+            </CTooltip>
+          </CNavItem>
           <AppHeaderDropdown />
         </CHeaderNav>
       </CContainer>

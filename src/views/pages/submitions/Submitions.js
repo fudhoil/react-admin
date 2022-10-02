@@ -11,7 +11,7 @@ const Submitions = () => {
   const { submitions, isLoading } = useSelector((state) => state.submitions);
   const dispatch = useDispatch();
   useEffect(() => {
-    document.title = "UGM Admin | Submitions";
+    document.title = "UGM International Forum - Admin | Submitions";
     dispatch(getSubmitions());
     setData(submitions);
   }, [dispatch]);

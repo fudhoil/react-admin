@@ -3,6 +3,7 @@ import loginReducer from "src/slices/login";
 import sidebarReducer from "src/slices/sidebar";
 import submitionsReducer from "src/slices/submitions";
 import registersReducer from "src/slices/registers";
+import userReducer from "src/slices/user";
 
 export default configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export default configureStore({
     sidebar: sidebarReducer,
     submitions: submitionsReducer,
     registers: registersReducer,
+    user: userReducer,
   },
 });
 

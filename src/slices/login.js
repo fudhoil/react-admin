@@ -20,7 +20,7 @@ export const login = createAsyncThunk(
       });
       const data = await response.json();
       if (response.ok) {
-        const getIdUser = await fetch(
+        const id = await fetch(
           "https://gxoib8zz.directus.app/users?filter[email][_eq]=" +
             payload.values.email,
           {
@@ -31,7 +31,7 @@ export const login = createAsyncThunk(
             },
           }
         );
-        const user = await getIdUser.json();
+        const user = await id.json();
         setCookie("userProfile", user);
         setCookie("user", data.data);
         <Navigate to="/" replace />;

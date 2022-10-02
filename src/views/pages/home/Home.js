@@ -4,7 +4,7 @@ import { Tabs3 } from "src/components";
 
 const Home = () => {
   useEffect(() => {
-    document.title = "UGM Admin | Home";
+    document.title = "UGM International Forum - Admin | Home";
   }, []);
 
   return (
@@ -16,19 +16,17 @@ const Home = () => {
           </CCardHeader>
           <CCardBody>
             <p className="text-medium-emphasis small">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
+              Welcome to UGM International Forum Admin. This is a simple
+              dashboard for you to get
             </p>
-            <Tabs3
+            {/* <Tabs3
               tab1="Preview"
               tab2="Code"
               tab3="Live"
               pane1="Preview"
               pane2="Code"
               pane3="Live"
-            />
+            /> */}
           </CCardBody>
         </CCard>
       </CCol>

@@ -35,7 +35,6 @@ const App = () => {
       <Routes>
         {isAuth() ? (
           <>
-            <Route path="/logout" name="Logout Page" element={<Login />} />
             <Route
               path="/login"
               name="Login Page"
