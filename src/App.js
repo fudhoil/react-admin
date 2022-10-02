@@ -29,7 +29,7 @@ const App = () => {
     if (!isLogged || errorRegister || errorSubmission) {
       dispatch(logout());
     }
-  }, [isLogged]);
+  }, [isLogged, errorRegister, errorSubmission]);
   return (
     <Suspense fallback={loading}>
       <Routes>
