@@ -1,7 +1,7 @@
 {
-  "name": "@coreui/coreui-free-react-admin-template",
+  "name": "react-admin",
   "version": "4.4.0",
-  "description": "CoreUI Free React Admin Template",
+  "description": "React Admin UGM International Forum",
   "homepage": ".",
   "bugs": {
     "url": "https://github.com/coreui/coreui-free-react-admin-template/issues"

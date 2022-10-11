@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { getCookie } from "src/services/cookies";
 
-const userId = getCookie("userProfile").data[0].id;
+const userId = getCookie("userProfile")?.data[0].id;
 console.log("userId", userId);
 
 export const fetchUser = createAsyncThunk("user/fetchUser", async () => {

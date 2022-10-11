@@ -32,7 +32,11 @@ const Submitions = () => {
         let ctr = 0;
         keys.forEach((key) => {
           if (ctr > 0) result += columnDelimiter;
-          if (key === "bukti_pembayaran" || key === "fullpaper") {
+          if (
+            key === "bukti_transfer" ||
+            key === "fullPaper" ||
+            key === "student_id"
+          ) {
             result +=
               "https://gxoib8zz.directus.app/assets/" + item[key] + "?download";
           } else if (key === "date_created") {

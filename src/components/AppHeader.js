@@ -35,7 +35,7 @@ const AppHeader = () => {
     } else {
       setUserName(fullName);
     }
-  }, [user]);
+  }, []);
 
   return (
     <CHeader position="sticky" className="mb-4">
