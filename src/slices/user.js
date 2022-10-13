@@ -3,7 +3,6 @@ import axios from "axios";
 import { getCookie } from "src/services/cookies";
 
 const userId = getCookie("userProfile")?.data[0].id;
-console.log("userId", userId);
 
 export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
   const response = await axios.get(

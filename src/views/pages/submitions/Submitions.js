@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
-import { CCard, CCardBody, CCol, CRow } from "@coreui/react";
+import { CCard, CCardBody, CCol, CRow, CImage } from "@coreui/react";
 import { useSelector, useDispatch } from "react-redux";
 import { getSubmitions } from "src/slices/submitions";
-import { CButton, CLink } from "@coreui/react";
+import { CButton } from "@coreui/react";
+import { Row, Container } from "react-bootstrap";
 import DataTable from "react-data-table-component";
-import Moment from "react-moment";
+// import Moment from "react-moment";
 
 const Submitions = () => {
   const [data, setData] = React.useState([]);
@@ -35,7 +36,8 @@ const Submitions = () => {
           if (
             key === "bukti_transfer" ||
             key === "fullPaper" ||
-            key === "student_id"
+            key === "student_id" ||
+            key === "personal_photo"
           ) {
             result +=
               "https://gxoib8zz.directus.app/assets/" + item[key] + "?download";
@@ -83,12 +85,62 @@ const Submitions = () => {
 
     const columns = [
       {
+        name: "QRCODE",
+        cell: (row) => (
+          <>
+            <CButton
+              size="sm"
+              variant="outline"
+              href={row.url_qrcode}
+              target="_blank"
+              style={{ marginRight: "100px" }}
+            >
+              <CImage src={row.url_qrcode} width={100} />
+            </CButton>
+          </>
+        ),
+      },
+      {
+        name: "Personal Photo",
+        cell: (row) => (
+          <>
+            <CButton
+              size="sm"
+              variant="outline"
+              href={
+                "https://gxoib8zz.directus.app/assets/" + row.personal_photo
+              }
+              target="_blank"
+            >
+              <CImage
+                src={
+                  "https://gxoib8zz.directus.app/assets/" + row.personal_photo
+                }
+                width={100}
+              />
+            </CButton>
+          </>
+        ),
+      },
+      {
         name: "Title",
         selector: (row) => row.title,
       },
       {
-        name: "Name",
-        selector: (row) => row.fullName,
+        name: "Sub Theme",
+        selector: (row) => row.subtheme,
+      },
+      {
+        name: "Names",
+        cell: (row) => (
+          <>
+            <Container>
+              <Row>1. {row.fullName}</Row>
+              <Row>2. {row.fullName2 || "-"}</Row>
+              <Row>3. {row.fullName3 || "-"}</Row>
+            </Container>
+          </>
+        ),
       },
       {
         name: "Email",
@@ -99,7 +151,7 @@ const Submitions = () => {
         selector: (row) => row.institution,
       },
       {
-        name: "Subteam",
+        name: "Category",
         selector: (row) => row.subteam,
       },
       {
@@ -121,7 +173,7 @@ const Submitions = () => {
         ),
       },
       {
-        name: "Bukti Pembayaran",
+        name: "Payment Proof",
         button: true,
         cell: (row) => (
           <CButton

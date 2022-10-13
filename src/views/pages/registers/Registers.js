@@ -17,21 +17,6 @@ const Submitions = () => {
     setData(registers);
   }, [dispatch]);
 
-  const decipher = (salt) => {
-    const textToChars = (text) => text.split("").map((c) => c.charCodeAt(0));
-    const applySaltToChar = (code) =>
-      textToChars(salt).reduce((a, b) => a ^ b, code);
-    return (encoded) =>
-      encoded
-        .match(/.{1,2}/g)
-        .map((hex) => parseInt(hex, 16))
-        .map(applySaltToChar)
-        .map((charCode) => String.fromCharCode(charCode))
-        .join("");
-  };
-
-  const myDecipher = decipher("aksd2344erd@");
-
   const ExportCSV = (props) => {
     const convertArrayOfObjectsToCSV = (array) => {
       let result;
@@ -91,21 +76,6 @@ const Submitions = () => {
     );
 
     const columns = [
-      {
-        name: "QRCODE",
-        cell: (row) => (
-          <>
-            <CButton
-              size="sm"
-              variant="outline"
-              href={row.url_qrcode}
-              target="_blank"
-            >
-              <CImage src={row.url_qrcode} width={100} />
-            </CButton>
-          </>
-        ),
-      },
       {
         name: "Email",
         selector: (row) => row.email,
