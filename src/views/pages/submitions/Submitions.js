@@ -93,7 +93,11 @@ const Submitions = () => {
               variant="outline"
               href={row.url_qrcode}
               target="_blank"
-              style={{ marginRight: "100px" }}
+              style={{
+                marginRight: "100px",
+                marginBottom: "10px",
+                marginTop: "10px",
+              }}
             >
               <CImage src={row.url_qrcode} width={100} />
             </CButton>
