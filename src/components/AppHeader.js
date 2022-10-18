@@ -24,18 +24,22 @@ import { fetchUser } from "src/slices/user";
 const AppHeader = () => {
   const dispatch = useDispatch();
   const show = useSelector((state) => state.sidebar.sidebarShow);
-  const { user } = useSelector((state) => state.user);
+  const { user, status } = useSelector((state) => state.user);
   const [userName, setUserName] = React.useState("");
-  const [fullName, setFullName] = React.useState("");
+  const fullName = "";
+  // setUserName(fullName.trim().substring(0, 20) + "...");
+
   useEffect(() => {
     dispatch(fetchUser());
-    setFullName(user?.first_name + " " + user?.last_name);
-    if (fullName.length > 20) {
-      setUserName(fullName.trim().substring(0, 20) + "...");
-    } else {
-      setUserName(fullName);
+    if (status === "succeeded") {
+      const fullName = user.first_name + " " + user.last_name;
+      if (fullName.length > 20) {
+        setUserName(fullName.trim().substring(0, 15) + "...");
+      } else {
+        setUserName(user.first_name + " " + user.last_name);
+      }
     }
-  }, []);
+  }, [userName, status]);
 
   return (
     <CHeader position="sticky" className="mb-4">
