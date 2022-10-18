@@ -39,7 +39,7 @@ const AppHeader = () => {
         setUserName(user.first_name + " " + user.last_name);
       }
     }
-  }, [userName, status]);
+  }, [status]);
 
   return (
     <CHeader position="sticky" className="mb-4">
