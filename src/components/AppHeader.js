@@ -31,15 +31,7 @@ const AppHeader = () => {
 
   useEffect(() => {
     dispatch(fetchUser());
-    if (status === "succeeded") {
-      const fullName = user.first_name + " " + user.last_name;
-      if (fullName.length > 20) {
-        setUserName(fullName.trim().substring(0, 15) + "...");
-      } else {
-        setUserName(user.first_name + " " + user.last_name);
-      }
-    }
-  }, [status]);
+  }, []);
 
   return (
     <CHeader position="sticky" className="mb-4">
@@ -68,7 +60,9 @@ const AppHeader = () => {
           <CNavItem className="pt-2">
             Welcome,{" "}
             <CTooltip content={fullName} placement="bottom">
-              <b>{userName}</b>
+              <b style={StyleSheet.truncate}>
+                {user?.first_name + " " + user?.last_name}
+              </b>
             </CTooltip>
           </CNavItem>
           <AppHeaderDropdown />
@@ -83,3 +77,13 @@ const AppHeader = () => {
 };
 
 export default AppHeader;
+
+const StyleSheet = {
+  truncate: {
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    maxWidth: "200px",
+    display: "inline-block",
+  },
+};
