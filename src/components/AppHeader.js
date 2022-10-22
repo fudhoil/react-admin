@@ -25,10 +25,6 @@ const AppHeader = () => {
   const dispatch = useDispatch();
   const show = useSelector((state) => state.sidebar.sidebarShow);
   const { user, status } = useSelector((state) => state.user);
-  const [userName, setUserName] = React.useState("");
-  const fullName = "";
-  // setUserName(fullName.trim().substring(0, 20) + "...");
-
   useEffect(() => {
     dispatch(fetchUser());
   }, []);
@@ -58,8 +54,10 @@ const AppHeader = () => {
         </CHeaderNav>
         <CHeaderNav className="ms-3">
           <CNavItem className="pt-2">
-            Welcome,{" "}
-            <CTooltip content={fullName} placement="bottom">
+            <CTooltip
+              content={user?.first_name + " " + user?.last_name}
+              placement="bottom"
+            >
               <b style={StyleSheet.truncate}>
                 {user?.first_name + " " + user?.last_name}
               </b>
